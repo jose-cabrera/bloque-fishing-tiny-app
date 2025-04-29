@@ -1,0 +1,24 @@
+{
+  "name": "bloque-fishing-leader-market",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "htm": "^3.1.1",
+    "preact": "^10.26.4",
+    "tailwindcss": "^4.1.4"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.1",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "vite": "^6.3.1"
+  },
+  "packageManager": "yarn@3.8.7+sha512.bbe7e310ff7fd20dc63b111110f96fe18192234bb0d4f10441fa6b85d2b644c8923db8fbe6d7886257ace948440ab1f83325ad02af457a1806cdc97f03d2508e"
+}
