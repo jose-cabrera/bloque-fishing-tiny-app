@@ -2,5 +2,13 @@ import { render } from "preact";
 import "./index.css";
 import App from "./app.js";
 import { html } from "./utils/html.js";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-render(html`<${App} />`, document.getElementById("app"));
+export const queryClient = new QueryClient();
+
+render(html`
+    <${QueryClientProvider} client=${queryClient}>
+        <${App} />
+    <//>
+    `, document.getElementById("app"));
+
