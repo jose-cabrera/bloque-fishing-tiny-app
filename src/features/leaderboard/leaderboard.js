@@ -68,7 +68,7 @@ const LeaderBoard = ({ isMobile, active, handleSelection }) => {
           html`
             <div class="flex z-10 justify-center items-center h-full w-full">
               <div class="flex items-center justify-center bg-gray-500/30 rounded-full w-32 h-32">
-                <img src="https://www.bloque.app/images/Yv0Xxq3LlMSU5WiWyNQU4GqN4o.svg" alt="Loading" class="loader " />
+                <img src="icons/bloque.svg" alt="Loading" class="loader " />
               </div>
             </div>  
           `
