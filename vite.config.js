@@ -5,6 +5,16 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
+    },
+  },
+  build: {
+    minify: 'esbuild',
+    target: 'esnext',
+  },
   plugins: [
     preact(),
     tailwindcss(),

@@ -2,7 +2,8 @@ import { useState, useEffect } from "preact/hooks";
 import "./app.css";
 import { html } from "./utils/html.js";
 import LeaderBoard from "./features/leaderboard/leaderboard.js";
-
+import { SECTION_LEADERBOARD, SECTION_MARKET } from "./features/leaderboard/constants.js";
+import { MOBILE_WIDTH } from "./constants.js";
 
 const App = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -10,8 +11,7 @@ const App = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      // setIsMobile(window.innerWidth <= 768);
-      setIsMobile(true)
+      setIsMobile(window.innerWidth <= MOBILE_WIDTH);      
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -31,15 +31,15 @@ const App = () => {
         setActiveSection(null);
       }
     }}>
-      ${(!isMobile || activeSection === null || activeSection === "leaderboard") &&
+      ${(!isMobile || activeSection === null || activeSection === SECTION_LEADERBOARD) &&
         html`
-          <div onClick=${() => handleSectionClick("leaderboard")}>
+          <div>
             <section className=${`flex basis-auto ${activeSection ? 'min-h-[90vh] max-h-[90vh]' : 'min-h-[45vh] max-h-[45vh]'} overflow-y-auto cursor-pointer`}>
-              <${LeaderBoard} />
+              <${LeaderBoard} isMobile=${isMobile} active=${activeSection === SECTION_LEADERBOARD} handleSelection=${handleSectionClick} />
             </section>
           </div>
         `}
-      ${(!isMobile || activeSection === null || activeSection === "marketplace") &&
+      ${(!isMobile || activeSection === null || activeSection === SECTION_MARKET) &&
         html`
           <div onClick=${() => handleSectionClick("marketplace")}>
             <section className=${`flex basis-auto ${activeSection ? 'min-h-[90vh] max-h-[90vh]' : 'min-h-[45vh] max-h-[45vh]'} overflow-y-auto cursor-pointer`}>
