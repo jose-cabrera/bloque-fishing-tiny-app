@@ -1,3 +1,5 @@
+import { API_URL } from "../../../api";
+
 export const fetchLeaderboard = async ({ signal } = {}) => {
     const controller = signal ? null : new AbortController();
     const timeoutId = signal
@@ -6,7 +8,7 @@ export const fetchLeaderboard = async ({ signal } = {}) => {
   
     try {
       const response = await fetch(
-        "https://api-game.bloque.app/game/leaderboard",
+        `${API_URL}/leaderboard`,
         {
           signal: signal || controller.signal,
         }
@@ -16,8 +18,7 @@ export const fetchLeaderboard = async ({ signal } = {}) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
   
-      const data = await response.json();
-      console.log("Leaderboard data:", data);
+      const data = await response.json();      
       return data;
     } catch (error) {
       console.error("Failed to fetch leaderboard:", error);
