@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import preact from "@preact/preset-vite";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,8 +15,10 @@ export default defineConfig({
   build: {
     minify: 'esbuild',
     target: 'esnext',
+    treeshake: true,
   },
   plugins: [
+    visualizer({ open: true }),
     preact(),
     tailwindcss(),
     VitePWA({
