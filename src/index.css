@@ -17,14 +17,22 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --vh: 1vh;
+}
+
+.explicit-bg { // Fix for android
+  @apply bg-white text-black dark:bg-gray-800 dark:text-white;
 }
 
 body {
   margin: 0;
   display: flex;  
   min-width: 320px;
-  min-height: 100vh;  
+  min-height: 90vh;  
 }
+
+
 
 @media (prefers-color-scheme: light) {
   :root {

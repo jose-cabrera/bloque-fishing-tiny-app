@@ -5,9 +5,11 @@ import Loading from "../../components/loading";
 import { MarketItem } from "./components/marketItem";
 import { saveToIndexedDB, loadFromIndexedDB } from "../../indexdb/db"
 import { LOCAL_MARKET_KEY } from "../../constants";
+import RefreshButton from "../../components/refreshButton";
+import SearchBar from "../../components/searchBar";
 
 export const Market = () => {
-    const { data, isLoading, error, refetch } = useMarket();  
+    const { data, isLoading, isFetching, error, refetch } = useMarket();  
     const [savedData, setSavedData] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -36,38 +38,24 @@ export const Market = () => {
             <div class="flex flex-row justify-between shadow-blue-950 border-b-green-800 items-center p-2 z-25 mb-0.5 border-b-2  mt-1 text-center">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-0">🪙 Market</h2>
                 <div class="flex space-x-2">
-                    <button 
-                    title="Reload"
-                    class="text-base px-3 py-1 rounded h-8 w-10 text-center text-white focus:outline-none bg-green-800 dark:bg-green-700 hover:bg-green-900 dark:hover:bg-green-800 transition-colors duration-200 outline-none focus:ring-2 focus:ring-green-800 dark:focus:ring-green-700 border border-green-800 dark:border-green-700 hover:scale-105 hover:opacity-90 transition-transform"
-                    onClick=${() => {
-                        refetch();
-                    }}
-                    >
-                    ↺ 
-                    </button>                
+                    <${RefreshButton} refresh=${refetch}/>              
                 </div>
             </div>
             <div class="px-3 pt-2 shadow-lg z-30">
-                <input 
-                type="text" 
-                placeholder="Search by item name" 
-                class="text-base w-full p-2 rounded-md border border-green-800 dark:border-green-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 mb-2 focus:outline-none focus:ring-2 focus:ring-green-800 dark:focus:ring-green-700"
-                value=${searchTerm}
-                onInput=${(e) => setSearchTerm(e.target.value)}
-                />
+                <${SearchBar} searchTerm=${searchTerm} setSearchTerm=${setSearchTerm} placeholder=${"Search by item name"}/>                
             </div>
             ${
-                isLoading ? (
+                isLoading || isFetching ? (
                     html`
-                    <${Loading} /> 
+                        <${Loading} />
                     `
                 ) : (
                     html`
-                    <div class="overflow-y-auto max-h-[80vh] space-y-2 px-2 pt-2 scrollbar-none">
-                      ${filteredItems.map((item) => html`
-                         <${MarketItem} item=${item}/>
-                      `)}
-                    </div>
+                        <div class="overflow-y-auto max-h-[80vh] space-y-2 px-2 pt-2 scrollbar-none">
+                        ${filteredItems.map((item) => html`
+                            <${MarketItem} item=${item}/>
+                        `)}
+                        </div>
                     `
                 )
                 }            
