@@ -15,7 +15,7 @@ const LeaderBoard = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");  
   const [showLegend, setShowLegend] = useState(false);
-  const [filteredPlayers, setFilteredPlayers] = useState([]);
+  const [filteredPlayers, setFilteredPlayers] = useState(null);
 
   const loadLeaderboard = async () => {
     setIsFetching(true);
@@ -72,7 +72,7 @@ const LeaderBoard = () => {
         <${SearchBar} searchTerm=${searchTerm} setSearchTerm=${setSearchTerm} placeholder=${"Search by username or emoji description"}/>
       </div>
       ${
-        isFetching ? (
+        isFetching || !filteredPlayers? (
           html`
             <${Loading} /> 
           `
